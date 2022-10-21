@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<config>
+    <database>
+        <host>localhost</host>
+        <user>root</user>
+        <password>root</password>
+        <dbname>internship_db</dbname>
+    </database>
+    <path>
+        <rooturl>http://localhost/InternshipApp_MVC</rooturl>
+    </path>
+</config>

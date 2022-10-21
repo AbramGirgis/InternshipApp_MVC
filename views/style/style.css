@@ -1,0 +1,71 @@
+
+
+.upNav{
+      background-color: #9C000D;
+      margin: 0 auto;
+      height: 50px;
+      width: 100%;
+      text-align: right;
+      color: white;
+    }
+.upNav .login-container span {
+  float: right;
+  padding: 6px 10px;
+  margin-top: 8px;
+  margin-right: 16px;
+  color: white;
+  font-size: 17px;
+}
+.upNav .login-container button {
+  float: right;
+  padding: 6px 10px;
+  margin-top: 8px;
+  margin-right: 16px;
+  background-color: #555;
+  color: white;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+
+.barNav{
+  background-color: #DB1123;
+  margin: 0 auto;
+  height: 90px;
+  width: 100%;
+  text-align: center;
+  color: white;
+}
+
+.underNav{
+  background-color: rgb(56, 55, 55);
+  margin: 0 auto;
+  height: 60px;
+  width: 100%;
+  text-align: center;
+  color: white;
+}
+
+/* footer */
+.foot{
+  background-color: #9C000D;
+  margin: 0 auto;
+  height: 70px;
+  width: 100%;
+  text-align: center;
+  color: white;
+}
+
+/* login background */
+#background_login{
+  background-image: url(/Web2/Images/p1.png);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+}
+
+#intro {
+  background-image: url(https://mdbootstrap.com/img/new/fluid/city/008.jpg);
+  height: 100vh;
+  background-repeat: no-repeat;
+}
