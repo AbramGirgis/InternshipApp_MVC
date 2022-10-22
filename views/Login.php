@@ -79,7 +79,7 @@ class Login
                                 <option value="company">Company</option>
                             </select>
                             <br><br><br>
-                            <!--                             Email input -->
+                            <!--                             ID input -->
                             <div class="form-outline mb-4">
                                 <input
                                         type="text"
