@@ -1,20 +1,25 @@
 <?php
 
-
-
 class CreateStudent
 {
-    private $html;
+//    private $html;
 
 //    constructor
     public function __construct()
     {
-        $this->Render();
+//        $this->Render();
     }
 
-    private function Render()
-    {
-        $this->html = '
+//    private function Render()
+//    {
+//        $this->html = 'Testttt!';
+//        echo $this->html;
+//    }
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,10 +41,9 @@ class CreateStudent
     <div class="upNav">
         <div class="login-container">
             <form action="">
-                <button type="button" onclick="location.href=\' '; ?>
-
-                <?php
-                $this->html = $this->html.ROOTURL."/login/".' \';" style="width: 90px">Back</button>
+                <button type="button" onclick="location.href='<?php echo ROOTURL . "/login/" ?>';" style="width: 90px">
+                    Back
+                </button>
                 <!-- <span>Welcome</span> -->
             </form>
         </div>
@@ -88,10 +92,6 @@ class CreateStudent
         </p>
     </div>
     <div class="container mt-3">
-
-
-<!--        --><?php
- ?>
 
 
         <form name="f" action="status.php" method="POST">
@@ -160,7 +160,7 @@ class CreateStudent
                 <tr>
                     <td><label>Cohort:</label></td>
                     <td>
-                        <input type="text" size="50" name="cohort" required
+                        <input type="text" size="50" name="deptId" required
                                pattern="[A-Z a-z]{4,50}"
                                title="Must contain minimum of 4 letters and maximum of 50 letters.">
                     </td>
@@ -168,39 +168,14 @@ class CreateStudent
                 <tr></tr>
                 <tr>
                     <td><label>Department:</label></td>
-                    <td><select name="depList" id="lov" required title="Please select a department">
-                     '; ?>
-<?php
+                    <td>
+                        <select name="departmentList" id="lov" required title="Please select a department">
 
-
-//        $query = "SELECT name FROM department";
-//        $statement = $this->con->prepare($query);
-//        $statement->execute();
-//        $result = $statement->fetchAll(PDO::FETCH_CLASS);
-//$departmentsArray = array();
-//foreach($result as $department)
-//{
-//    $departmentsArray[] = $department->name;
-//}
-$db_host="localhost";
-$db_user = "root";
-$db_pw = "root";
-$db_name = "internship_db";
-$connection = mysqli_connect($db_host, $db_user, $db_pw, $db_name)or die (mysqli_errno($connection));
-$sql = "SELECT name FROM `department`;";
-$query = mysqli_query($connection, $sql);
-while ($row = mysqli_fetch_assoc($query)) {
-    ?>
-
-    $this->html = $this->html."
-    <option><?php echo $row['name']; ?></option>
-<?php }
-mysqli_close($connection); ?>
-
-
+                            <option>Computer Science</option>
+                            <option>Software Engineering</option>
 
                         </select>
-                        </td>
+                    </td>
                 </tr>
                 <tr></tr>
                 <tr>
@@ -261,9 +236,3 @@ mysqli_close($connection); ?>
 </main>
 </body>
 </html>
-        ';
-         echo $this->html;
-    }
-}
-
-?>

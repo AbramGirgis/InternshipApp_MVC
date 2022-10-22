@@ -2,8 +2,9 @@
 
 class Login
 {
-    private $html;
+//    private $html;
     private $loginMessage;
+
 //    constructor
     public function __construct($loginMessage)
     {
@@ -13,8 +14,18 @@ class Login
 
     private function Render()
     {
-        $this->html = '
-        <!DOCTYPE html>
+//        $this->html = 'Testtt!';
+//
+//        echo $this->html;
+//        echo "</br>";
+        echo $this->loginMessage;
+    }
+}
+
+?>
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
@@ -73,11 +84,7 @@ class Login
 
                         <form class="bg-white rounded-5 shadow-5-strong p-5"
                               method="POST"
-                              action=" '; ?>
-
-        <?php
-
-        $this->html = $this->html . ROOTURL . "/login/" . '">
+                              action="<?php echo ROOTURL . "/login/" ?>">
 
                             <!--                  Choose role/actor-->
                             <select class="form-select" id="role" name="role" required>
@@ -127,15 +134,10 @@ class Login
 
                                 <div class="col text-center">
                                     <!-- Sign up -->
-                                    <a
-                                            href=" '; ?>
-        <?php
-
-        $this->html = $this->html . ROOTURL . "/student/signup/" . ' "
-                                            class="btn btn-primary btn-block"
-                                            style="background-color: #9c000d; width: 175px"
-                                    >Sign up</a
-                                    >
+                                    <a href=" <?php echo ROOTURL . "/student/signup/" ?> "
+                                       class="btn btn-primary btn-block"
+                                       style="background-color: #9c000d; width: 175px"
+                                    >Sign up</a>
                                 </div>
                             </div>
                         </form>
@@ -156,15 +158,6 @@ class Login
 </footer>
 </body>
 </html>
-        ';
-
-        echo $this->html;
-        echo "</br>";
-        echo $this->loginMessage;
-    }
-}
-
-?>
 
 
 
