@@ -1,5 +1,7 @@
 <?php
 
+require_once(dirname(__DIR__)."/core/database/DBConnector.php");
+
 class Student{
     private $firstName;
     private $lastName;

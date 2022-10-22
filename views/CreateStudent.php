@@ -1,7 +1,11 @@
 <?php
 
+
+
 class CreateStudent
 {
+    private $html;
+
 //    constructor
     public function __construct()
     {
@@ -10,7 +14,7 @@ class CreateStudent
 
     private function Render()
     {
-        $html = '
+        $this->html = '
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,7 +39,7 @@ class CreateStudent
                 <button type="button" onclick="location.href=\' '; ?>
 
                 <?php
-                $html = $html.ROOTURL."/login/".' \';" style="width: 90px">Back</button>
+                $this->html = $this->html.ROOTURL."/login/".' \';" style="width: 90px">Back</button>
                 <!-- <span>Welcome</span> -->
             </form>
         </div>
@@ -156,29 +160,47 @@ class CreateStudent
                 <tr>
                     <td><label>Cohort:</label></td>
                     <td>
-                        <select name="cohortList" id="lov" required title="Please select a cohort">
-<!--                            --><?php
-//                            // $db_host="localhost";
-//                            // $db_user = "root";
-//                            // $db_pw = "";
-//                            // $db_name = "internship_db";
-//                            // $connection = mysqli_connect($db_host, $db_user, $db_pw, $db_name)or die (mysqli_errno($connection));
-//                            $sql = "SELECT * FROM `cohort`;";
-//                            $query = mysqli_query($connection, $sql);
-//                            while ($row = mysqli_fetch_assoc($query)) {
-//                                ?>
-<!--                                <option>--><?php  ?><!--</option>-->
-<!--                            --><?php //}
-//                            mysqli_close($connection); ?>
-                        </select>
+                        <input type="text" size="50" name="cohort" required
+                               pattern="[A-Z a-z]{4,50}"
+                               title="Must contain minimum of 4 letters and maximum of 50 letters.">
                     </td>
                 </tr>
                 <tr></tr>
                 <tr>
                     <td><label>Department:</label></td>
-                    <td><input type="text" size="50" name="deptId" required
-                               pattern="[A-Z a-z]{4,50}"
-                               title="Must contain minimum of 4 letters and maximum of 50 letters."></td>
+                    <td><select name="depList" id="lov" required title="Please select a department">
+                     '; ?>
+<?php
+
+
+//        $query = "SELECT name FROM department";
+//        $statement = $this->con->prepare($query);
+//        $statement->execute();
+//        $result = $statement->fetchAll(PDO::FETCH_CLASS);
+//$departmentsArray = array();
+//foreach($result as $department)
+//{
+//    $departmentsArray[] = $department->name;
+//}
+$db_host="localhost";
+$db_user = "root";
+$db_pw = "root";
+$db_name = "internship_db";
+$connection = mysqli_connect($db_host, $db_user, $db_pw, $db_name)or die (mysqli_errno($connection));
+$sql = "SELECT name FROM `department`;";
+$query = mysqli_query($connection, $sql);
+while ($row = mysqli_fetch_assoc($query)) {
+    ?>
+
+    $this->html = $this->html."
+    <option><?php echo $row['name']; ?></option>
+<?php }
+mysqli_close($connection); ?>
+
+
+
+                        </select>
+                        </td>
                 </tr>
                 <tr></tr>
                 <tr>
@@ -240,7 +262,8 @@ class CreateStudent
 </body>
 </html>
         ';
-         echo $html;
+         echo $this->html;
     }
 }
+
 ?>

@@ -43,7 +43,7 @@ class Validator{
 
     // Login the user
     // We can use an identifier for the user and session instead of the username
-    public function login($params, $data){
+    public function login($data){
 
         $result = $this->user->getUserbyCredentials($data);
 

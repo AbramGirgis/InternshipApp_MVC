@@ -8,11 +8,11 @@ final class URLRequest{
     private array $header;
     private string $url;
 
-    function __construct($method, $url, $urlparams, $header, $payload){
+    function __construct($method, $url, $urlParams, $header, $payload){
 
         $this->method = $method;
         $this->url = $url;
-        $this->urlParameters = $urlparams;
+        $this->urlParameters = $urlParams;
         $this->header = $header;
         $this->payload = $payload;
 

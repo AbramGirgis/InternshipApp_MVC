@@ -19,12 +19,14 @@ class LoginController{
         if($this->authentication->isLoggedIn()){
             // If the user is already logged in direct them to a default page
             header("Location: ".ROOTURL."/students/profile/");
-        }else{
+        } else{
             if(!empty($payload)){
                 // // If the user credentials are valid
-                if($this->authentication->Login($params, $payload)){
+                if($this->authentication->Login($payload)){
+
+                    //var_dump($payload);
                     // If the user is logged in, direct them to a default page
-                    header("Location: ".ROOTURL."/students/profile/");
+                    header("Location: ".ROOTURL."/student/profile/");
                 }
                 else{
                     $this->loginMessage = "Invalid credentials, please verify your student ID and password and try again.";
@@ -34,7 +36,7 @@ class LoginController{
             // URL: http://localhost/mvcapp/login/
 
             if(class_exists("Login")){
-                $loginView = new Login();
+                $loginView = new Login($this->loginMessage);
             }
 
         }

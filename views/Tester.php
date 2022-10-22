@@ -1,17 +1,22 @@
 <?php
+class Tester{
 
-class ProfileStudent
-{
-
+    private $test;
 
     public function __construct()
     {
         $this->render();
     }
 
-    function render()
-    {
-        $html = '
+    function render(){
+        $this->test = "";
+        echo $this->test;
+    }
+
+}
+
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -22,14 +27,7 @@ class ProfileStudent
     <title>Document</title>
 </head>
 <body>
-<p>Student Home page!!!</p>
-<br>
-
+<p>this is a test page!!!!!</p>
 </body>
 </html>
-        ';
-        echo $html;
-        echo "<br>";
-        echo '<a href="'.ROOTURL.'/logout/'.'">Logout</a>';
-    }
-}
+

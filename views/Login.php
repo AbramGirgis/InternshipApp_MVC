@@ -2,15 +2,18 @@
 
 class Login
 {
+    private $html;
+    private $loginMessage;
 //    constructor
-    public function __construct()
+    public function __construct($loginMessage)
     {
+        $this->loginMessage = $loginMessage;
         $this->Render();
     }
 
     private function Render()
     {
-        $html = '
+        $this->html = '
         <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,7 +73,11 @@ class Login
 
                         <form class="bg-white rounded-5 shadow-5-strong p-5"
                               method="POST"
-                              action="validation.php">
+                              action=" '; ?>
+
+        <?php
+
+        $this->html = $this->html . ROOTURL . "/login/" . '">
 
                             <!--                  Choose role/actor-->
                             <select class="form-select" id="role" name="role" required>
@@ -124,7 +131,7 @@ class Login
                                             href=" '; ?>
         <?php
 
-        $html = $html . ROOTURL . "/signup/" . ' "
+        $this->html = $this->html . ROOTURL . "/student/signup/" . ' "
                                             class="btn btn-primary btn-block"
                                             style="background-color: #9c000d; width: 175px"
                                     >Sign up</a
@@ -151,7 +158,9 @@ class Login
 </html>
         ';
 
-        echo $html;
+        echo $this->html;
+        echo "</br>";
+        echo $this->loginMessage;
     }
 }
 
