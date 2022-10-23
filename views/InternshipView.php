@@ -37,7 +37,12 @@ class InternshipView
                 <button type="button" onclick="location.href='<?php echo ROOTURL . '/logout/'; ?>';">Logout</button>
                 <span
                 >Welcome
-              <label id="student_username" name="student_username"><?php echo "<b>" . "Name" . "</b>"; ?>
+                    <?php
+                    $name = new Student();
+                    $fullName = $name->getUserName();
+                    $userName = $fullName[0]->fullName;
+                    ?>
+              <label id="student_username" name="student_username"><?php echo "<b>" . $userName . "</b>"; ?>
 </label
 ></span
                 >
@@ -64,16 +69,16 @@ class InternshipView
                 <ul class="navbar-nav">
                     <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo ROOTURL."/student/home/"?>">Home</a>
+                        <a class="nav-link" href="<?php echo ROOTURL . "/student/home/" ?>">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="profile.php">Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo ROOTURL."/student/internship/"?>">Internship</a>
+                        <a class="nav-link" href="<?php echo ROOTURL . "/student/internship/" ?>">Internship</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="myApplications.php">My Applications</a>
+                        <a class="nav-link" href="<?php echo ROOTURL."/student/myapplications/"?>">My Applications</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="updateProfile.php">Settings</a>
@@ -133,8 +138,10 @@ class InternshipView
                     <td>
                         <!-- -->
                         <form method="GET" action="viewDetail.php">
-                            <?php $internshipID= $obj->internshipID ?>
-                            <button class="btn btn-danger"> <?php echo '<a href="viewDetail.php?detailId=' . $internshipID . '"style ="color:white;" >View Details</a>'; ?></button>
+                            <?php $internshipID = $obj->internshipID ?>
+                            <button class="btn btn-danger"><a
+                                        href="<?php echo ROOTURL . "/student/internshipdetails/" . $internshipID ?>"
+                                        style="color:white;">View Details</a></button>
                         </form>
                     </td>
                 </tr>

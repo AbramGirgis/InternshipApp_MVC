@@ -13,7 +13,6 @@ class InternshipDetailsView
     private function render($var){
         echo $var;
         echo "<br>";
-        echo "banana";
     }
 
 }
@@ -43,7 +42,12 @@ class InternshipDetailsView
                 <button type="button" onclick="location.href='<?php echo ROOTURL . '/logout/'; ?>';">Logout</button>
                 <span
                 >Welcome
-              <label id="student_username" name="student_username"><?php echo "<b>" . "Name" . "</b>"; ?>
+                    <?php
+                    $name = new Student();
+                    $fullName = $name->getUserName();
+                    $userName = $fullName[0]->fullName;
+                    ?>
+              <label id="student_username" name="student_username"><?php echo "<b>" . $userName . "</b>"; ?>
 </label></span
                 >
             </form>
@@ -78,7 +82,7 @@ class InternshipDetailsView
                         <a class="nav-link" href="<?php echo ROOTURL."/student/internship/"?>">Internship</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="myApplications.php">My Applications</a>
+                        <a class="nav-link" href="<?php echo ROOTURL."/student/myapplications/"?>">My Applications</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="updateProfile.php">Settings</a>

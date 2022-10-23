@@ -1,20 +1,9 @@
 <?php
 
-class HomeStudent
+class MyApplications
 {
-//private $name;
-
     public function __construct()
     {
-//        $this->name = $name;
-    }
-
-    function render()
-    {
-//        $html = '';
-//        echo $html;
-//        echo "<br>";
-//        echo '<a href="' . ROOTURL . '/logout/' . '">Logout</a>';
     }
 }
 
@@ -33,7 +22,7 @@ class HomeStudent
             crossorigin="anonymous"
     />
     <link rel="stylesheet" href="Style/styleStudent.css"/>
-    <title>Student Home Page</title>
+    <title>Student Applications</title>
 </head>
 
 <body>
@@ -41,17 +30,16 @@ class HomeStudent
     <div class="upNav">
         <div class="login-container">
             <form action="">
-                <button type="button" onclick="location.href='<?php echo ROOTURL . '/logout/'; ?>';">Logout</button>
+                <button type="button" onclick="location.href='logOut.php';"/>
+                Logout</button>
                 <span
                 >Welcome
-                 <?php
-                 $name = new Student();
-                 $fullName = $name->getUserName();
-//                 var_dump($fullName);
-//                 echo "<br>";
-                 $userName = $fullName[0]->fullName;
-                 ?>
-              <label id="student_username" name="student_username"><?php echo "<b>" .$userName. "</b>"; ?>
+                    <?php
+                    $name = new Student();
+                    $fullName = $name->getUserName();
+                    $userName = $fullName[0]->fullName;
+                    ?>
+              <label id="student_username" name="student_username"><?php echo "<b>" . $userName . "</b>"; ?>
 </label
 ></span
                 >
@@ -97,55 +85,43 @@ class HomeStudent
         </div>
     </nav>
     <div class="underNav">
-        <p style="padding: 18px">
-            <label id="percent" name="percent">60%</label>&nbsp; Complete your
-            profile to have a higher chance of securing an internship!
-        </p>
+<!--        <p style="padding: 18px">-->
+<!--            <label id="percent" name="percent">60%</label>&nbsp; Complete your-->
+<!--            profile to have a higher chance of securing an internship!-->
+<!--        </p>-->
     </div>
     <div class="container mt-3">
-        <h2>Recent Posts</h2>
-        <p>
-            Here are the most recent internships in
-            <?php
-            $department = new Internship();
-            $result = $department->getDepartment();
-            ?>
-            <b><?php echo $result[0]->name; ?> Department</b>
-        </p>
         <?php
-        $recentInternships = new Internship();
+        $department = new Internship();
+        $result = $department->getDepartment();
+        ?>
+        <b><?php echo $result[0]->name; ?> Department</b>
+        <br><br>
+        <h3>My applications</h3>
+        </p>
+
+        <?php
+        $applications = new Internship();
+        $myApplication = $applications->getMyApplications();
         ?>
         <table class="table table-striped">
-            <tbody>
-            <?php
-            foreach ($recentInternships->getRecentInternships() as $obj) { ?>
+            <tr>
+                <th>Internship Title</th>
+                <th>Application Date</th>
+                <th>status</th>
+                <th>Deadline</th>
+            </tr>
+                <tbody>
+                <?php
+                foreach ($myApplication as $obj) { ?>
                 <tr>
                     <td><?php echo $obj->internshipTitle; ?></td>
-                    <td></td>
-                    <td></td>
+                    <td><?php echo $obj->date; ?></td>
+                    <td><?php echo $obj->status; ?></td>
+                    <td><?php echo $obj->endDate; ?></td>
                 </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                        Short Description:
-                    </td>
-                    <td><?php echo $obj->shortDescription; ?></td>
-                </tr>
-
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <form method="GET" action="viewDetail.php">
-                            <?php $internshipID= $obj->internshipID ?>
-                            <button class="btn btn-danger"><a style="color:white;"
-                                                              href="<?php echo ROOTURL."/student/internshipdetails/".$internshipID?>">View
-                                    Details</button>
-                        </form>
-                    </td>
-                </tr>
+                </tbody>
             <?php } ?>
-            </tbody>
         </table>
     </div>
 
@@ -157,7 +133,5 @@ class HomeStudent
         </p>
     </footer>
 </main>
-
-
 </body>
 </html>

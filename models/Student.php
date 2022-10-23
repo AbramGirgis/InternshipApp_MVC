@@ -35,6 +35,13 @@ class Student
         return $statement->fetchAll(PDO::FETCH_CLASS);
     }
 
+    function getUserName(){
+        $query = "SELECT CONCAT(firstName, ' ', lastName) AS fullName FROM student WHERE studentID = :studentID";
+        $statement = $this->con->prepare($query);
+        $statement->execute(['studentID' => $_SESSION['username']]);
+        return $statement->fetchAll(PDO::FETCH_CLASS);
+    }
+
     function getDepartment()
     {
         $query = "SELECT * FROM department";
@@ -69,6 +76,20 @@ class Student
 
         return 0;
 
+    }
+
+    //to Add applications to MyApplications
+    function addStudentApplication(){
+        $query = "INSERT INTO `student_internship` (`studentID`, `internshipID`, `date`, `status`) VALUES (:studentID, :internshipID, :CURRENT_TIMESTAMP, :status)";
+        $statement = $this->con->prepare($query);
+
+        $statement->execute([ 'studentID' => $_SESSION['username']
+            ,'internshipID' => "???"
+            ,'status' => "applied"
+        ]);
+
+        // Return the number of rows created
+        return $statement->rowCount();
     }
 
 }

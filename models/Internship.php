@@ -47,4 +47,12 @@ class Internship
         return $statement->fetchAll(PDO::FETCH_CLASS);
     }
 
+    function getMyApplications(){
+        $query = "SELECT * FROM student_internship INNER JOIN internshipoffer ON student_internship.internshipID = internshipoffer.internshipID 
+INNER JOIN student ON student.studentID = student_internship.studentID AND student_internship.studentID=" . $_SESSION["username"];
+        $statement = $this->con->prepare($query);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_CLASS);
+    }
+
 }
