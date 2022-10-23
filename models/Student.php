@@ -4,17 +4,17 @@ require_once(dirname(__DIR__) . "/core/database/DBConnector.php");
 
 class Student
 {
-    private $firstName;
-    private $lastName;
-    private $dateOfBirth;
-    private $email;
-    private $password;
-    private $phoneNumber;
-    private $collegeID;
-    private $Rscore;
-    private $cohort;
-    private $department;
-    private $isConsent;
+//    private $firstName;
+//    private $lastName;
+//    private $dateOfBirth;
+//    private $email;
+//    private $password;
+//    private $phoneNumber;
+//    private $collegeID;
+//    private $Rscore;
+//    private $cohort;
+//    private $department;
+//    private $isConsent;
 
     private $con;
 

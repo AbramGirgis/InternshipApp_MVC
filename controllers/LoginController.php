@@ -18,7 +18,7 @@ class LoginController{
 
         if($this->authentication->isLoggedIn()){
             // If the user is already logged in direct them to a default page
-            header("Location: ".ROOTURL."/students/profile/");
+            header("Location: ".ROOTURL."/students/home/");
         } else{
             if(!empty($payload)){
                 // // If the user credentials are valid
@@ -26,7 +26,7 @@ class LoginController{
 
                     //var_dump($payload);
                     // If the user is logged in, direct them to a default page
-                    header("Location: ".ROOTURL."/student/profile/");
+                    header("Location: ".ROOTURL."/student/home/");
                 }
                 else{
                     $this->loginMessage = "Invalid credentials, please verify your student ID and password and try again.";
