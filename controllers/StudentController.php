@@ -47,17 +47,21 @@ class StudentController
                     if (class_exists("HomeStudent")) {
                         $userHome = new HomeStudent();
                     }
+                } elseif ($action == "profile"){
+                    if (class_exists("ProfileStudent")) {
+                        $userHome = new ProfileStudent();
+                    }
                 } elseif ($action == "internship"){
                     if (class_exists("InternshipView")) {
                         $userHome = new InternshipView();
                     }
-                } elseif ($action == "internshipdetails"){
-                    if (class_exists("InternshipDetailsView")) {
-                        $userHome = new InternshipDetailsView($params[1]);
-                    }
                 } elseif ($action == "myapplications") {
                     if (class_exists("MyApplications")) {
                         $userApplications = new MyApplications();
+                    }
+                } elseif ($action == "internshipdetails") {
+                    if (class_exists("InternshipDetailsView")) {
+                        $userHome = new InternshipDetailsView($params[1]);
                     }
                 }
 

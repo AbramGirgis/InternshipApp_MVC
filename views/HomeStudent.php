@@ -81,7 +81,7 @@ class HomeStudent
                         <a class="nav-link" href="<?php echo ROOTURL."/student/home/"?>">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="profile.php">Profile</a>
+                        <a class="nav-link" href="<?php echo ROOTURL."/student/profile/"?>">Profile</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo ROOTURL."/student/internship/"?>">Internship</a>
@@ -97,10 +97,10 @@ class HomeStudent
         </div>
     </nav>
     <div class="underNav">
-        <p style="padding: 18px">
-            <label id="percent" name="percent">60%</label>&nbsp; Complete your
-            profile to have a higher chance of securing an internship!
-        </p>
+<!--        <p style="padding: 18px">-->
+<!--            <label id="percent" name="percent">60%</label>&nbsp; Complete your-->
+<!--            profile to have a higher chance of securing an internship!-->
+<!--        </p>-->
     </div>
     <div class="container mt-3">
         <h2>Recent Posts</h2>

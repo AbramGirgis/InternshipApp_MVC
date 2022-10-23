@@ -76,7 +76,7 @@ class InternshipDetailsView
                         <a class="nav-link" href="<?php echo ROOTURL."/student/home/"?>">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="profile.php">Profile</a>
+                        <a class="nav-link" href="<?php echo ROOTURL."/student/profile/"?>">Profile</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo ROOTURL."/student/internship/"?>">Internship</a>

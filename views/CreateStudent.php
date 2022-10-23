@@ -188,7 +188,7 @@ class CreateStudent
                             <option value="0">Select your department</option>
                             <?php
                             $studentDepartment = new Student();
-                            foreach ($studentDepartment->getDepartment() as $obj) {
+                            foreach ($studentDepartment->getAllDepartment() as $obj) {
                                 echo '<option value="' . $obj->depID . '">' . $obj->name . '</option>';
                             } ?>
 

@@ -42,7 +42,14 @@ class Student
         return $statement->fetchAll(PDO::FETCH_CLASS);
     }
 
-    function getDepartment()
+    function getUserDetails(){
+        $query = "SELECT * FROM student WHERE studentID = :studentID";
+        $statement = $this->con->prepare($query);
+        $statement->execute(['studentID' => $_SESSION['username']]);
+        return $statement->fetchAll(PDO::FETCH_CLASS);
+    }
+
+    function getAllDepartment()
     {
         $query = "SELECT * FROM department";
         $statement = $this->con->prepare($query);
