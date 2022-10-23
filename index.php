@@ -57,16 +57,5 @@ if(file_exists(__DIR__.'/controllers/' .$controllername.'.php')){
 
 
 
-//if (isset($_GET['params'])) {
-//    if ($_GET['params'] == "login"){
-//        if(class_exists('Login'))
-//            $loginObj = new Login();
-//        }
-//    elseif ($_GET['params'] == "signup") {
-//        if(class_exists('CreateStudent'))
-//            $signUpObj = new CreateStudent();
-//    }
-//}
-
 
 
