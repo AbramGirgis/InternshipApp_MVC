@@ -19,9 +19,13 @@ class StudentController
             if (class_exists("CreateStudent")) {
                 $createNewUser = new CreateStudent();
             }
-//            if (class_exists("Tester")) {
-//                $createNewUser1 = new Tester();
-//            }
+
+        } elseif ($action == "register") {
+            if (!empty($payload)) {
+                $newUser = new Student();
+                $newUser->create($payload);
+                header("Location: " . ROOTURL . "/login/");
+            }
         } else {
 
 

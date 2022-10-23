@@ -3,10 +3,27 @@
 class CreateStudent
 {
 //    private $html;
+    //private $result;
 
 //    constructor
     public function __construct()
     {
+//        $studentDepartment = new Student();
+//        $this->result = $studentDepartment->getDepartment();
+//        var_dump($this->result);
+//        echo '<br>';
+//        echo $this->result[0]->name;
+//        echo '<br>';
+//        echo $this->result[0]->depID;
+//        echo '<br><br>';
+//
+//        foreach ($this->result as $obj) {
+//            echo $obj->depID;
+//            echo '<br>';
+//            echo $obj->name;
+//            echo '<br>';
+//        }
+
 //        $this->Render();
     }
 
@@ -94,7 +111,7 @@ class CreateStudent
     <div class="container mt-3">
 
 
-        <form name="f" action="status.php" method="POST">
+        <form name="f" action="<?php echo ROOTURL."/student/register/"?>" method="POST">
             <br>
             <h3>Sign up</h3>
             <br><br>
@@ -160,9 +177,7 @@ class CreateStudent
                 <tr>
                     <td><label>Cohort:</label></td>
                     <td>
-                        <input type="text" size="50" name="deptId" required
-                               pattern="[A-Z a-z]{4,50}"
-                               title="Must contain minimum of 4 letters and maximum of 50 letters.">
+                        <input type="text" name="cohortId" required>
                     </td>
                 </tr>
                 <tr></tr>
@@ -170,9 +185,12 @@ class CreateStudent
                     <td><label>Department:</label></td>
                     <td>
                         <select name="departmentList" id="lov" required title="Please select a department">
-
-                            <option>Computer Science</option>
-                            <option>Software Engineering</option>
+                            <option value="0">Select your department</option>
+                            <?php
+                            $studentDepartment = new Student();
+                            foreach ($studentDepartment->getDepartment() as $obj) {
+                                echo '<option value="' . $obj->depID . '">' . $obj->name . '</option>';
+                            } ?>
 
                         </select>
                     </td>
