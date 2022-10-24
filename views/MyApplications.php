@@ -78,7 +78,7 @@ class MyApplications
                         <a class="nav-link" href="<?php echo ROOTURL."/student/myapplications/"?>">My Applications</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="updateProfile.php">Settings</a>
+                        <a class="nav-link" href="<?php echo ROOTURL."/student/settings/"?>">Settings</a>
                     </li>
                 </ul>
             </div>

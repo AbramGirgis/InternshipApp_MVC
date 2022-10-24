@@ -85,14 +85,37 @@ class Student
 
     }
 
-    //to Add applications to MyApplications
+    //to Add applications to MyApplications page
     function addStudentApplication(){
-        $query = "INSERT INTO `student_internship` (`studentID`, `internshipID`, `date`, `status`) VALUES (:studentID, :internshipID, :CURRENT_TIMESTAMP, :status)";
+        $query = "INSERT INTO `student_internship` (`studentID`, `internshipID`, `date`, `status`) VALUES (:studentID, :internshipID, CURRENT_TIMESTAMP, :status)";
         $statement = $this->con->prepare($query);
 
         $statement->execute([ 'studentID' => $_SESSION['username']
             ,'internshipID' => "???"
             ,'status' => "applied"
+        ]);
+
+        // Return the number of rows created
+        return $statement->rowCount();
+    }
+
+    //to use in the Profile page
+    function getProfilePic(){
+        $query = "SELECT * FROM filesuser WHERE userid = :studentID AND type = 'image'";
+        $statement = $this->con->prepare($query);
+        $statement->execute(['studentID' => $_SESSION['username']]);
+        return $statement->fetchAll(PDO::FETCH_CLASS);
+    }
+
+    //Add a profile picture from settings page
+    function insertProfilePic(){
+        $query = "INSERT INTO `filesuser` (`userID`, `type`, `status`, `lastUpdate`, `extension`) VALUES (:studentID, :type, :status, CURRENT_TIMESTAMP, :extension)";
+        $statement = $this->con->prepare($query);
+
+        $statement->execute([ 'studentID' => $_SESSION['username']
+            ,'type' => "image"
+            ,'status' => 0
+            ,'extension' => "jpg"
         ]);
 
         // Return the number of rows created

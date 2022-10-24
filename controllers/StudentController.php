@@ -63,6 +63,10 @@ class StudentController
                     if (class_exists("InternshipDetailsView")) {
                         $userHome = new InternshipDetailsView($params[1]);
                     }
+                } elseif ($action == "settings") {
+                    if (class_exists("Settings")) {
+                        $userHome = new Settings();
+                    }
                 }
 
             }// if loggedIn

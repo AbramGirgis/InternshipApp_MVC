@@ -27,11 +27,12 @@ class CreateStudent
 //        $this->Render();
     }
 
-//    private function Render()
-//    {
+    private function Render()
+    {
 //        $this->html = 'Testttt!';
 //        echo $this->html;
-//    }
+
+    }
 }
 
 ?>
