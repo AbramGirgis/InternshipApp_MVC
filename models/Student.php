@@ -108,18 +108,27 @@ class Student
     }
 
     //Add a profile picture from settings page
-    function insertProfilePic(){
-        $query = "INSERT INTO `filesuser` (`userID`, `type`, `status`, `lastUpdate`, `extension`) VALUES (:studentID, :type, :status, CURRENT_TIMESTAMP, :extension)";
+    function insertProfilePic($type, $extention, $description){
+        $query = "INSERT INTO `filesuser` (`userID`, `type`, `status`, `description` , `lastUpdate`, `extension`) VALUES (:studentID, :type, :status, :description, CURRENT_TIMESTAMP, :extension)";
         $statement = $this->con->prepare($query);
 
         $statement->execute([ 'studentID' => $_SESSION['username']
-            ,'type' => "image"
-            ,'status' => 0
-            ,'extension' => "jpg"
+            ,'type' => $type
+            ,'status' => 1
+            ,'description' => $description
+            ,'extension' => $extention
         ]);
 
         // Return the number of rows created
         return $statement->rowCount();
+    }
+
+    //Get student uploaded files in settings and profile pages
+    function getStudentDocuments(){
+        $query = "SELECT * FROM filesuser WHERE userid = :studentID AND type <> 'image'";
+        $statement = $this->con->prepare($query);
+        $statement->execute(['studentID' => $_SESSION['username']]);
+        return $statement->fetchAll(PDO::FETCH_CLASS);
     }
 
 }

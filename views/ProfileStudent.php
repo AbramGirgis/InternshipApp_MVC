@@ -78,7 +78,7 @@ class ProfileStudent
                             Applications</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo ROOTURL."/student/settings/"?>">Settings</a>
+                        <a class="nav-link" href="<?php echo ROOTURL . "/student/settings/" ?>">Settings</a>
                     </li>
                 </ul>
             </div>
@@ -106,27 +106,24 @@ class ProfileStudent
                 <?php
                 $imgStudent = new Student();
                 $profilePic = $imgStudent->getProfilePic();
+                // var_dump($profilePic);
 
-                //var_dump($profilePic);
-
-                $fileImg = str_replace("'", "", __DIR__ . "/images/profileImg" . $_SESSION['username']);
-                $fileImg = str_replace(".", "", $fileImg);
-                $fileImg = $fileImg . '.jpg';
-                //profileImg2203102jpg
-                //echo $fileImg;
                 if (!empty($profilePic)) {
-                    if ($profilePic->status == 1) {
-                        echo "<img src='$fileImg'>";
+                    $fileImg = __DIR__ . "/images/profilePic" . $_SESSION['username'];
+                    $fileImg = $fileImg . "." . $profilePic[0]->extension;
+                    if ($profilePic[0]->status == 1) {
+                        echo "<img src='$fileImg' alt='Profile Picture!'>";
                     }
                 } else {
-                    echo "<img src ='images/profiledefault.jpg'>";
+                    echo "<img src ='./images/profiledefault.jpg'>";
                 }
                 echo "<br>" . $userName;
+                echo "<br><br>";
 
                 $student = new Student();
                 $studentDetails = $student->getUserDetails();
-
                 ?>
+
                 <form name="f" action="#" method="POST">
                     <table style="border:1; width:50%;height:90%;">
                         <?php
@@ -218,25 +215,31 @@ class ProfileStudent
 
                 <table>
                     <tr>
-                        <th>File Type</th>
-                        <th>Description</th>
-                        <th>Last Update</th>
+                        <th style="width: 150px;">File Type</th>
+                        <th style="width: 150px;">Description</th>
+                        <th style="width: 150px;">Last Update</th>
                     </tr>
                     <?php
-                    //                    $sql = "SELECT * FROM filesuser WHERE userID =$uid AND type != 'image'";
-                    //                    $result = mysqli_query($connection, $sql);
-                    //                    while ($row = mysqli_fetch_assoc($result)) {
-                    ?>
-                    <tr>
-                        <td><a href="uploads/documents/<?php //echo $uid . $row['type'] . "." . $row['extension'] ?>"
-                               target="_blank" "="" ><?php //echo $row['type'] ?></a></td>
-                        <td><?php //echo $row['description']; ?></td>
-                        <td><?php //echo $row ['lastUpdate'] ?></td>
-                    </tr>
+                    $studentDoc = new Student();
+                    $stdDocuments = $studentDoc->getStudentDocuments();
+
+                    foreach ($stdDocuments as $obj) {
+                        ?>
+                        <tr>
+                            <td>
+                                <!--                                <a href="uploads/documents/-->
+                                <?php //echo $uid . $row['type'] . "." . $row['extension'] ?><!--"-->
+                                <!--                                   target="_blank" "="" >-->
+                                <?php //echo $row['type'] ?><!--</a>-->
+                                <?php echo $obj->type; ?>
+                            </td>
+                            <td><?php echo $obj->description; ?></td>
+                            <td><?php echo $obj->lastUpdate; ?></td>
+                        </tr>
                     <?php } ?>
                 </table>
                 </form>
-                <?php //mysqli_close($connection); ?>
+                <?php } ?>
                 </td>
                 <td></td>
             </tr>

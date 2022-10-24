@@ -102,35 +102,33 @@ class Settings
                 <td></td>
 
                 <?php
-
                 $imgStudent = new Student();
                 $profilePic = $imgStudent->getProfilePic();
+                // var_dump($profilePic);
 
-                $fileImg = str_replace("'", "", __DIR__ . "/images/profileImg" . $_SESSION['username']);
-                $fileImg = str_replace(".", "", $fileImg);
-                $fileImg = $fileImg . '.jpg';
-                //profileImg2203102jpg
-                //echo $fileImg;
-                //if ($rowImg['status']==0){echo "<img src = 'uploads/profileImg'.$uid.'jpg'>";}
                 if (!empty($profilePic)) {
-                    if ($profilePic->status == 1) {
-                        echo "<img src='$fileImg'>";
+                    $fileImg = __DIR__ . "/images/profilePic" . $_SESSION['username'];
+                    $fileImg = $fileImg . "." . $profilePic[0]->extension;
+                    if ($profilePic[0]->status == 1) {
+                        echo "<img src='$fileImg' alt='Profile Picture!'>";
                     }
                 } else {
-                    echo "<img src ='images/profiledefault.jpg'>";
+                    echo "<img src ='./images/profiledefault.jpg'>";
                 }
                 echo "<br>" . $userName;
-
+                echo "<br><br>";
 
                 $student = new Student();
                 $studentDetails = $student->getUserDetails();
-
                 ?>
 
-                <form action='<?php echo ROOTURL . "/student/settings/" ?>' method='POST' enctype='multipart/form-data'>
+                <form action='<?php echo ROOTURL . "/upload/picture/" ?>' method='POST' enctype='multipart/form-data'>
                     <p><input type='file' name='file'></p>
-                    <p><button type="submit" name="submit">Upload</button></p>
+                    <p>
+                        <button type="submit" name="submit">Upload</button>
+                    </p>
                 </form>
+
 
                 <form name="f" action="#" method="POST">
                     <table style="border:1; width:50%;height:90%;">
@@ -201,8 +199,7 @@ class Settings
     </div>
 
 
-
-<!--    Portfolio-->
+    <!--    Portfolio-->
     <div class="container mt-3">
         <table class="table table-striped">
             <tbody>
@@ -211,20 +208,26 @@ class Settings
 
                 <table>
                     <tr>
-                        <th>File Type</th>
-                        <th>Description</th>
-                        <th>Last Update</th>
+                        <th style="width: 100px;">File Type</th>
+                        <th style="width: 100px;">Description</th>
+                        <th style="width: 100px;">Last Update</th>
                     </tr>
                     <?php
-                    $sql = "SELECT * FROM filesuser WHERE userID =$uid AND type != 'image'";
-                    $result = mysqli_query($connection, $sql);
-                    while ($row = mysqli_fetch_assoc($result)) {
+                    $studentDoc = new Student();
+                    $stdDocuments = $studentDoc->getStudentDocuments();
+
+                    foreach ($stdDocuments as $obj) {
                         ?>
                         <tr>
-                            <td><a href="uploads/documents/<?php echo $uid . $row['type'] . "." . $row['extension'] ?>"
-                                   target="_blank" "="" ><?php echo $row['type'] ?></a></td>
-                            <td><?php echo $row['description']; ?></td>
-                            <td><?php echo $row ['lastUpdate'] ?></td>
+                            <td>
+                                <!--                                <a href="uploads/documents/-->
+                                <?php //echo $uid . $row['type'] . "." . $row['extension'] ?><!--"-->
+                                <!--                                   target="_blank" "="" >-->
+                                <?php //echo $row['type'] ?><!--</a>-->
+                                <?php echo $obj->type; ?>
+                            </td>
+                            <td><?php echo $obj->description; ?></td>
+                            <td><?php echo $obj->lastUpdate; ?></td>
                         </tr>
                     <?php } ?>
                     <script> function check() {
@@ -235,13 +238,18 @@ class Settings
                             }
                         }
                     </script>
+
                     <tr>
-                        <?php echo "<form  name ='form1' action='status.php' method='POST' enctype='multipart/form-data'>" ?>
-                        <td><input type="text" size="50" name="filType"></td>
-                        <td><input type="text" size="50" name="descrip"></td>
-                        <td>
-                            <?php echo "<input type='file' name='file'>
-	<input type='submit' onClick='check();' name='uploadDoc' value ='Upload'></button></form>"; ?>
+                        <form name='form1' action='<?php echo ROOTURL . "/upload/file/" ?>' method='POST'
+                              enctype='multipart/form-data'>
+                            <td><input type="text" size="50" name="filType"></td>
+                            <td><input type="text" size="50" name="descrip"></td>
+                            <td>
+                                <input type='file' name='file'>
+                                <button type='submit' onClick='check();' name='uploadDoc' value='Upload'>Click To
+                                    Upload
+                                </button>
+                        </form>
                         </td>
                     </tr>
                     <tr>
@@ -256,8 +264,6 @@ class Settings
                     </tr>
                     <?php } ?>
                 </table>
-
-                <?php //mysqli_close($connection); ?>
 
 
     </div>
