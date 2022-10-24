@@ -32,7 +32,7 @@ class HomeStudent
             integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
             crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="Style/styleStudent.css"/>
+    <link rel="stylesheet" href="./style/style.css"/>
     <title>Student Home Page</title>
 </head>
 
