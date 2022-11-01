@@ -1,0 +1,8 @@
+# This is a comment when the line starts with the hash sign
+
+# This file is not only for rewrite rules it could have many Apache settings, example permissions
+ErrorDocument 404 /InternshipApp_MVC/page404.php
+RewriteEngine On
+RewriteBase "/InternshipApp_MVC/"
+RewriteRule ^/?([a-z]+)/(.*)/(.*)$ index.php?params=$1=$3&action=$2
+RewriteRule ^/?([a-z]+)/ index.php?params=$1
