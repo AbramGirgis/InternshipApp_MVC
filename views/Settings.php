@@ -268,6 +268,15 @@ class Settings
 
     </div>
 
+    <div>
+        <p>
+        <form action="<?php echo ROOTURL . "/student/deactivate/" ?>">
+            <input type="submit" value="Deactivate Account" name="deactivate" class="btn btn-primary btn-block"
+                   style="width: 175px">
+        </form>
+        </p>
+    </div>
+
     <br><br><br><br><br>
     <footer class="foot">
         <p style="padding: 10px">

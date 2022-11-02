@@ -27,7 +27,7 @@ class Student
 
     function getUserbyCredentials($data)
     {
-        $query = "SELECT * FROM student WHERE studentID = :studentID AND password = :password";
+        $query = "SELECT * FROM student WHERE studentID = :studentID AND password = :password AND isActive = 1";
         $statement = $this->con->prepare($query);
         $statement->execute(['studentID' => $data["login"]
             , 'password' => $data["password"]
@@ -57,6 +57,7 @@ class Student
         return $statement->fetchAll(PDO::FETCH_CLASS);
     }
 
+    //Create a New Student
     function create($data){
 
         if(!empty($data)){
@@ -84,6 +85,15 @@ class Student
         return 0;
 
     }
+
+    //Deactivate a Student
+    function deactivateStudent(){
+        $query = "UPDATE `student` SET `isActive`='0' WHERE `studentID` = :studentID";
+        $statement = $this->con->prepare($query);
+        $statement->execute(['studentID' => $_SESSION['username']]);
+        return $statement->fetchAll(PDO::FETCH_CLASS);
+    }
+
 
     //to Add applications to MyApplications page
     function addStudentApplication($internshipID){

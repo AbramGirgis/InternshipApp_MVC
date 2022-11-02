@@ -72,6 +72,9 @@ class StudentController
                     if (class_exists("MyApplications")) {
                         $userApplications = new MyApplications();
                     }
+                } elseif ($action == "deactivate") {
+                    $user->deactivateStudent();
+                    header("Location: " . ROOTURL . "/logout/");
                 }
 
             }// if loggedIn
