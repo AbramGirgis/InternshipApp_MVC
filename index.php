@@ -35,6 +35,14 @@ if(isset($URLParametersString))
     // Transform the URL parameters from a string into an array
     $paramsArray = explode("=", $URLParametersString);
 
+//Here We are supposed to direct to the controllers to choose the right controller
+//ListOfUsersControllers
+//-LoginController.php
+//-LogoutController.php
+//-StudentController.php
+//-UpdateController.php
+//-DeleteController.php
+
 $controllername = ucfirst(htmlentities($paramsArray[0]))."Controller";
 
 if(file_exists(__DIR__.'/controllers/' .$controllername.'.php')){
