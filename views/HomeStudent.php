@@ -136,7 +136,7 @@ class HomeStudent
                     <td></td>
                     <td></td>
                     <td>
-                        <form method="GET" action="viewDetail.php">
+                        <form method="GET" action="">
                             <?php $internshipID= $obj->internshipID ?>
                             <button class="btn btn-danger"><a style="color:white;"
                                                               href="<?php echo ROOTURL."/student/internshipdetails/".$internshipID?>">View

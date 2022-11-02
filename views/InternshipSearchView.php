@@ -3,25 +3,25 @@
 class InternshipSearchView
 {
     private $keyWord;
+
     public function __construct($keyWord)
     {
-        $this->keyWord=$keyWord;
-        //echo $this->keyWord;
+        $this->keyWord = $keyWord;
+        $this->renderSearch($this->keyWord);
+
     }
 
-    /**
-     * @return mixed
-     */
-    public function getKeyWord()
+    public function renderSearch($key)
     {
-        return $this->keyWord;
-    }
 
+        $name = new Student();
+        $fullName = $name->getUserName();
+        $userName = $fullName[0]->fullName;
 
-}
+        $department = new Internship();
+        $result = $department->getDepartment();
 
-?>
-
+        $html = '
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,124 +44,125 @@ class InternshipSearchView
     <div class="upNav">
         <div class="login-container">
             <form action="">
-                <button type="button" onclick="location.href='<?php echo ROOTURL . '/logout/'; ?>';">Logout</button>
-                <span
-                >Welcome
-                    <?php
-                    $name = new Student();
-                    $fullName = $name->getUserName();
-                    $userName = $fullName[0]->fullName;
-                    ?>
-              <label id="student_username" name="student_username"><?php echo "<b>" . $userName . "</b>"; ?>
-</label
-></span
-                >
-            </form>
-        </div>
-    </div>
+                <button type="button" onclick="location.href=\' ' . ROOTURL . '/logout/' . ' \';">Logout</button><span>Welcome
+                    
+              <label id="student_username" name="student_username"><b> ' . $userName . ' </b>
+</label></span>
+</form>
+</div>
+</div>
 
-    <nav
+<nav
         class="navbar navbar-expand-sm navbar-dark"
         style="background-color: #db1123; height: 90px">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#"><span
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#"><span
                     style="padding-left: 40px; padding-right: 50px; font-size: 30px"
-                >Vanier College</span
-                ></a>
-            <button
+            >Vanier College</span
+            ></a>
+        <button
                 class="navbar-toggler"
                 type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#collapsibleNavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="collapsibleNavbar">
-                <ul class="navbar-nav">
-                    <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo ROOTURL . "/student/home/" ?>">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo ROOTURL."/student/profile/"?>">Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo ROOTURL . "/student/internship/" ?>">Internship</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo ROOTURL."/student/myapplications/"?>">My Applications</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo ROOTURL."/student/settings/"?>">Settings</a>
-                    </li>
-                </ul>
-            </div>
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                <li class="nav-item">
+                    <a class="nav-link" href=" ' . ROOTURL . "/student/home/" . '">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href=" ' . ROOTURL . "/student/profile/" . ' ">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href=" ' . ROOTURL . "/student/internship/" . ' ">Internship</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href=" ' . ROOTURL . "/student/myapplications/" . ' ">My Applications</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href=" ' . ROOTURL . "/student/settings/" . ' ">Settings</a>
+                </li>
+            </ul>
         </div>
-    </nav>
-    <div class="underNav">
-        <!-- <p style="padding: 18px">
-          <label id="percent" name="percent">60%</label>&nbsp; Complete your
-          profile to have a higher chance of securing an internship!
-        </p> -->
-
     </div>
+</nav>
+<div class="underNav">
+    <!-- <p style="padding: 18px">
+      <label id="percent" name="percent">60%</label>&nbsp; Complete your
+      profile to have a higher chance of securing an internship!
+    </p> -->
 
-    <div class="container mt-3">
+</div>
 
-        <h2>Internships</h2>
-        <p>
-            <?php
-            $department = new Internship();
-            $result = $department->getDepartment();
-            ?>
-            <b><?php echo $result[0]->name; ?> Department</b>
-            <br>
-            Here is a list of the availbale internship offers added to the department
-        </p>
-        <?php
+<div class="container mt-3">
+
+    <h2>Internships</h2>
+    <p>
+        <b>' . $result[0]->name . ' Department</b>
+        <br>
+        Here is a list of the availbale internship offers added to the department
+    </p>';
+
+        echo $html;
+
         $recentInternships = new Internship();
-        ?>
-        <table class="table table-striped">
-            <tbody>
-            <?php
-            foreach ($recentInternships->searchForInternships("Full") as $obj) { ?>
-                <tr>
-                    <td><?php echo $obj->internshipTitle; ?></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                        Short Description:
-                    </td>
-                    <td><?php echo $obj->shortDescription; ?> </td>
-                </tr>
 
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <!-- -->
-                        <form method="GET" action="viewDetail.php">
-                            <?php $internshipID = $obj->internshipID ?>
-                            <button class="btn btn-danger"><a
-                                    href="<?php echo ROOTURL . "/student/internshipdetails/" . $internshipID ?>"
+        echo '<table class="table table-striped">
+        <tbody>';
+
+        foreach ($recentInternships->searchForInternships($key) as $obj) {
+            echo '<tr>
+                <td>' . $obj->internshipTitle . '</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    Short Description:
+                </td>
+                <td>' . $obj->shortDescription . ' </td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td></td>
+                <td>
+                    <!-- -->
+                    <form method="GET" action="viewDetail.php">';
+            $internshipID = $obj->internshipID;
+            echo '<button class="btn btn-danger"><a
+                                    href=" ' . ROOTURL . "/student/internshipdetails/" . $internshipID . ' "
                                     style="color:white;">View Details</a></button>
-                        </form>
-                    </td>
-                </tr>
-            <?php } ?>
-            </tbody>
-        </table>
-    </div>
+                    </form>
+                </td>
+            </tr>';
+        }
 
-    <br><br><br><br><br>
-    <footer class="foot">
-        <p style="padding: 10px">
-            @ IMS. Montreal, QC, CA <br/>
-            Privacy | Terms
-        </p>
-    </footer>
+        echo '
+        </tbody>
+    </table>
+</div>
+
+<br><br><br><br><br>
+<footer class="foot">
+    <p style="padding: 10px">
+        @ IMS. Montreal, QC, CA <br/>
+        Privacy | Terms
+    </p>
+</footer>
 </main>
 </body>
 </html>
+        ';
+
+    }
+
+}
+
+?>
+
+
