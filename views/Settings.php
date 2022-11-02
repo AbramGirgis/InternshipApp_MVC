@@ -122,6 +122,7 @@ class Settings
                 $studentDetails = $student->getUserDetails();
                 ?>
 
+<!--                Upload Profile Picture-->
                 <form action='<?php echo ROOTURL . "/upload/picture/" ?>' method='POST' enctype='multipart/form-data'>
                     <p><input type='file' name='file'></p>
                     <p>
@@ -130,7 +131,7 @@ class Settings
                 </form>
 
 
-                <form name="f" action="#" method="POST">
+                <form name="f" action="<?php echo ROOTURL."/student/update/"?>" method="POST">
                     <table style="border:1; width:50%;height:90%;">
                         <?php
                         foreach ($studentDetails
@@ -165,8 +166,11 @@ class Settings
                         </tr>
                         <tr>
                             <td><label>CollegeID:</label></td>
-                            <td><input type="number" size="50" name="stdID"
-                                       value= <?php echo $obj->studentID; ?> disabled></td>
+<!--                            <td><input type="number" size="50" name="stdID"-->
+<!--                                       value= --><?php //echo $obj->studentID; ?><!-- disabled></td>-->
+                            <td>
+                                <label size="50">&nbsp;<?php echo $obj->studentID; ?></label>
+                            </td>
                         </tr>
                         <tr>
                             <td><label>R-Score:</label></td>
@@ -175,7 +179,7 @@ class Settings
                         <tr>
                             <td><label>Cohort:</label></td>
                             <td>
-                                <input type="text" size="50" name="programTitle"
+                                <input type="text" size="50" name="cohortId"
                                        value= <?php echo $obj->cohortID; ?>>
                             </td>
                         </tr>
@@ -185,8 +189,27 @@ class Settings
                             $department = new Internship();
                             $result = $department->getDepartment();
                             ?>
-                            <td><input type="text" size="50" name="deptId"
-                                       value= <?php echo $result[0]->name; ?> disabled></td>
+                            <td>
+                                <label size="50">&nbsp;<?php echo $result[0]->name; ?></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><br></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <input type="submit" value="Update Profile" name="update" class="btn btn-primary btn-block"
+                                       style="background-color: #9c000d; width: 175px">
+                            </td>
+                            <td>
+                                <form action="<?php echo ROOTURL . "/student/deactivate/" ?>">
+                                    <input type="submit" value="Deactivate Account" name="deactivate" class="btn btn-primary btn-block"
+                                           style="width: 175px">
+                                </form>
+                            </td>
                         </tr>
                     </table>
                 </form>
@@ -206,11 +229,12 @@ class Settings
             <tr>
                 <td><h3>Portfolio:</h3></td>
 
-                <table>
+                <table class="table table-striped">
                     <tr>
-                        <th style="width: 100px;">File Type</th>
-                        <th style="width: 100px;">Description</th>
-                        <th style="width: 100px;">Last Update</th>
+                        <th>File Name</th>
+                        <th>File Type</th>
+                        <th>Description</th>
+                        <th>Last Update</th>
                     </tr>
                     <?php
                     $studentDoc = new Student();
@@ -219,13 +243,8 @@ class Settings
                     foreach ($stdDocuments as $obj) {
                         ?>
                         <tr>
-                            <td>
-                                <!--                                <a href="uploads/documents/-->
-                                <?php //echo $uid . $row['type'] . "." . $row['extension'] ?><!--"-->
-                                <!--                                   target="_blank" "="" >-->
-                                <?php //echo $row['type'] ?><!--</a>-->
-                                <?php echo $obj->type; ?>
-                            </td>
+                            <td><?php echo $obj->fileName; ?></td>
+                            <td><?php echo $obj->type; ?></td>
                             <td><?php echo $obj->description; ?></td>
                             <td><?php echo $obj->lastUpdate; ?></td>
                         </tr>
@@ -242,40 +261,23 @@ class Settings
                     <tr>
                         <form name='form1' action='<?php echo ROOTURL . "/upload/file/" ?>' method='POST'
                               enctype='multipart/form-data'>
-                            <td><input type="text" size="50" name="filType"></td>
-                            <td><input type="text" size="50" name="descrip"></td>
+                            <td></td>
+                            <td><input type="text" name="filType" placeholder="Enter the file Type"></td>
+                            <td><input type="text" name="descrip" placeholder="Enter the file Description"></td>
                             <td>
                                 <input type='file' name='file'>
-                                <button type='submit' onClick='check();' name='uploadDoc' value='Upload'>Click To
-                                    Upload
-                                </button>
+                                <button type='submit' onClick='check();' name='uploadDoc'
+                                        value='Upload'>Click To Upload</button>
+                            </td>
                         </form>
-                        </td>
                     </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+
                     <?php } ?>
                 </table>
 
 
     </div>
 
-    <div>
-        <p>
-        <form action="<?php echo ROOTURL . "/student/deactivate/" ?>">
-            <input type="submit" value="Deactivate Account" name="deactivate" class="btn btn-primary btn-block"
-                   style="width: 175px">
-        </form>
-        </p>
-    </div>
 
     <br><br><br><br><br>
     <footer class="foot">

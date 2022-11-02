@@ -66,7 +66,7 @@ class UploadController
                         if (move_uploaded_file($fileTmpName, $fileDestination)) {
                             // echo "File is uploaded successfully!!";
                             $studentFile = new Student();
-                            $studentFile->insertProfilePic("image",$fileActualExt,"");
+                            $studentFile->insertStudentFiles("image",$fileActualExt,"", $fileNameNew);
                             header("Location: " . ROOTURL . "/student/settings/");
                         }else {
                             header("Location: " . ROOTURL . "/student/settings/");
@@ -83,7 +83,6 @@ class UploadController
                 // echo "You cannot upload files of this type: " . $fileActualExt;
                 header("Location: " . ROOTURL . "/student/settings/");
             }
-
 
     }
 
@@ -103,7 +102,7 @@ class UploadController
         $fileActualExt = strtolower($fileNameExtArray[1]);
 //        $fileActualExt = strtolower(end($fileNameExtArray)); //the same as the line above
 
-        $allowedTypes = array('pdf', 'docx', 'doc');
+        $allowedTypes = array('pdf', 'docx', 'doc', 'txt');
 
         if (in_array($fileActualExt, $allowedTypes)) {
             if ($fileError === 0) {
@@ -115,7 +114,7 @@ class UploadController
                         $studentFile = new Student();
                         $fileType = $payload['filType'];
                         $fileDescription = $payload['descrip'];
-                        $studentFile->insertProfilePic($fileType,$fileActualExt, $fileDescription);
+                        $studentFile->insertStudentFiles($fileType,$fileActualExt, $fileDescription, $fileNameNew);
                         header("Location: " . ROOTURL . "/student/settings/");
                     }else {
                         header("Location: " . ROOTURL . "/student/settings/");

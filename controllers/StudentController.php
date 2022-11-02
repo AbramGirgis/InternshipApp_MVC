@@ -24,8 +24,18 @@ class StudentController
         } elseif ($action == "register") {
             if (!empty($payload)) {
                 $newUser = new Student();
-                $newUser->create($payload);
-                header("Location: " . ROOTURL . "/login/");
+                $isCreated = $newUser->create($payload);
+                if ($isCreated == 0) {
+                    echo "Student ID already exists!";
+                    echo "<br>";
+                    echo '
+                    <form action="">
+                        <button type="button" onclick="location.href=\'' . ROOTURL . "/student/signup/" . ' \';" style="width: 90px">Back</button>
+                    </form>
+                    ';
+                } else {
+                    header("Location: " . ROOTURL . "/login/");
+                }
             }
         } else {
 
@@ -47,11 +57,11 @@ class StudentController
                     if (class_exists("HomeStudent")) {
                         $userHome = new HomeStudent();
                     }
-                } elseif ($action == "profile"){
+                } elseif ($action == "profile") {
                     if (class_exists("ProfileStudent")) {
                         $userHome = new ProfileStudent();
                     }
-                } elseif ($action == "internship"){
+                } elseif ($action == "internship") {
                     if (class_exists("InternshipView")) {
                         $userHome = new InternshipView();
                     }
@@ -67,14 +77,31 @@ class StudentController
                     if (class_exists("Settings")) {
                         $userHome = new Settings();
                     }
+                } elseif ($action == "update") {
+                    $user->updateStudentDetails($payload);
+                    if (class_exists("ProfileStudent")) {
+                        $userHome = new ProfileStudent();
+                    }
                 } elseif ($action == "apply") {
-                    $user->addStudentApplication($params[1]);
-                    if (class_exists("MyApplications")) {
-                        $userApplications = new MyApplications();
+                    $notApplied = $user->addStudentApplication($params[1]);
+                    if ($notApplied == 0) {
+                        echo "You have already applied for this Internship!";
+                        echo "<br>";
+                        echo '
+                            <form action="">
+                                <button type="button" onclick="location.href=\'' . ROOTURL . "/student/internship/" . ' \';" style="width: 90px">Back</button>
+                            </form>
+                        ';
+                    } else {
+                        if (class_exists("MyApplications")) {
+                            $userApplications = new MyApplications();
+                        }
                     }
                 } elseif ($action == "deactivate") {
                     $user->deactivateStudent();
                     header("Location: " . ROOTURL . "/logout/");
+                } elseif ($action == "openfile") {
+                    $user->displaySelectedFile($params[1]);
                 }
 
             }// if loggedIn

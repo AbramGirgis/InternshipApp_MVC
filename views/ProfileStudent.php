@@ -95,15 +95,7 @@ class ProfileStudent
             <tbody>
             <tr>
                 <td>
-                    <h3>Profile<h3>
-                </td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-
-                <?php
+                    <?php
                 $imgStudent = new Student();
                 $profilePic = $imgStudent->getProfilePic();
                 // var_dump($profilePic);
@@ -111,6 +103,7 @@ class ProfileStudent
                 if (!empty($profilePic)) {
                     $fileImg = __DIR__ . "/images/profilePic" . $_SESSION['username'];
                     $fileImg = $fileImg . "." . $profilePic[0]->extension;
+                    //echo $fileImg;
                     if ($profilePic[0]->status == 1) {
                         echo "<img src='$fileImg' alt='Profile Picture!'>";
                     }
@@ -119,9 +112,19 @@ class ProfileStudent
                 }
                 echo "<br>" . $userName;
                 echo "<br><br>";
+                ?>
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><h3>Profile<h3></td>
+                <td>
 
+                <?php
                 $student = new Student();
                 $studentDetails = $student->getUserDetails();
+                echo "<br><br>";
                 ?>
 
                 <form name="f" action="#" method="POST">
@@ -187,12 +190,13 @@ class ProfileStudent
                             $department = new Internship();
                             $result = $department->getDepartment();
                             ?>
-                            <td><input type="text" size="50" name="deptId"
-                                       value= <?php echo $result[0]->name; ?> disabled></td>
+                            <td>
+                                <label size="50">&nbsp;<?php echo $result[0]->name; ?></label>
+                            </td>
                         </tr>
                     </table>
                 </form>
-
+                </td>
                 <td></td>
             </tr>
             <tr>
@@ -213,11 +217,12 @@ class ProfileStudent
             <tr>
                 <td><h3>Portfolio:</h3></td>
 
-                <table>
+                <table class="table table-striped">
                     <tr>
-                        <th style="width: 150px;">File Type</th>
-                        <th style="width: 150px;">Description</th>
-                        <th style="width: 150px;">Last Update</th>
+                        <th>File Name</th>
+                        <th>File Type</th>
+                        <th>Description</th>
+                        <th>Last Update</th>
                     </tr>
                     <?php
                     $studentDoc = new Student();
@@ -226,13 +231,8 @@ class ProfileStudent
                     foreach ($stdDocuments as $obj) {
                         ?>
                         <tr>
-                            <td>
-                                <!--                                <a href="uploads/documents/-->
-                                <?php //echo $uid . $row['type'] . "." . $row['extension'] ?><!--"-->
-                                <!--                                   target="_blank" "="" >-->
-                                <?php //echo $row['type'] ?><!--</a>-->
-                                <?php echo $obj->type; ?>
-                            </td>
+                            <td><a href="<?php echo ROOTURL . "/student/openfile/".$obj->fileName; ?>"><?php echo $obj->fileName; ?></a></td>
+                            <td><?php echo $obj->type; ?></td>
                             <td><?php echo $obj->description; ?></td>
                             <td><?php echo $obj->lastUpdate; ?></td>
                         </tr>
