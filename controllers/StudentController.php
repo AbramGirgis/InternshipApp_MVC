@@ -67,6 +67,11 @@ class StudentController
                     if (class_exists("Settings")) {
                         $userHome = new Settings();
                     }
+                } elseif ($action == "apply") {
+                    $user->addStudentApplication($params[1]);
+                    if (class_exists("MyApplications")) {
+                        $userApplications = new MyApplications();
+                    }
                 }
 
             }// if loggedIn

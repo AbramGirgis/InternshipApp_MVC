@@ -94,7 +94,9 @@ class InternshipSearchView
       <label id="percent" name="percent">60%</label>&nbsp; Complete your
       profile to have a higher chance of securing an internship!
     </p> -->
-
+    <form action="">
+        <button type="button" onclick="location.href=\' ' . ROOTURL . "/student/internship/" . ' \';" style="width: 200px">Remove Search Filters</button>
+    </form>
 </div>
 
 <div class="container mt-3">

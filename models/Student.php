@@ -86,15 +86,13 @@ class Student
     }
 
     //to Add applications to MyApplications page
-    function addStudentApplication(){
+    function addStudentApplication($internshipID){
         $query = "INSERT INTO `student_internship` (`studentID`, `internshipID`, `date`, `status`) VALUES (:studentID, :internshipID, CURRENT_TIMESTAMP, :status)";
         $statement = $this->con->prepare($query);
-
         $statement->execute([ 'studentID' => $_SESSION['username']
-            ,'internshipID' => "???"
+            ,'internshipID' => $internshipID
             ,'status' => "applied"
         ]);
-
         // Return the number of rows created
         return $statement->rowCount();
     }
