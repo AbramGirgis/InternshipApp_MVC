@@ -14,7 +14,9 @@ class Internship
 
     function getRecentInternships()
     {
-        $query = "SELECT * FROM internshipoffer INNER JOIN department ON internshipoffer.depID = department.depID WHERE isActive = 1 ORDER BY lastUpdate DESC LIMIT 3 ";
+        $query = "SELECT * FROM internshipoffer INNER JOIN department ON internshipoffer.depID = department.depID
+         INNER JOIN student ON student.depID = department.depID
+         WHERE internshipoffer.isActive = 1 AND studentID =". $_SESSION["username"]." ORDER BY internshipoffer.lastUpdate DESC LIMIT 3 ";
         $statement = $this->con->prepare($query);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_CLASS);
@@ -22,7 +24,9 @@ class Internship
 
     function getInternships()
     {
-        $query = "SELECT * FROM internshipoffer INNER JOIN department ON internshipoffer.depID = department.depID WHERE isActive = 1 ORDER BY lastUpdate DESC";
+        $query = "SELECT * FROM internshipoffer INNER JOIN department ON internshipoffer.depID = department.depID
+         INNER JOIN student ON student.depID = department.depID
+         WHERE internshipoffer.isActive = 1 AND studentID =". $_SESSION["username"]." ORDER BY internshipoffer.lastUpdate DESC";
         $statement = $this->con->prepare($query);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_CLASS);
@@ -52,6 +56,18 @@ class Internship
 INNER JOIN student ON student.studentID = student_internship.studentID AND student_internship.studentID=" . $_SESSION["username"];
         $statement = $this->con->prepare($query);
         $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_CLASS);
+    }
+
+
+    //Search
+    function searchForInternships($keyWord){
+        $query = "SELECT * FROM internshipoffer INNER JOIN department ON internshipoffer.depID = department.depID
+         INNER JOIN student ON student.depID = department.depID
+         WHERE internshipoffer.isActive = 1 AND studentID =". $_SESSION["username"]." 
+         And internshipTitle LIKE :search";
+        $statement = $this->con->prepare($query);
+        $statement->execute(array(':search' => '%'.$keyWord.'%'));
         return $statement->fetchAll(PDO::FETCH_CLASS);
     }
 
