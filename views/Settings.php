@@ -110,25 +110,25 @@ class Settings
                     $fileImg = __DIR__ . "/images/profilePic" . $_SESSION['username'];
                     $fileImg = $fileImg . "." . $profilePic[0]->extension;
                     if ($profilePic[0]->status == 1) {
-                        echo "<img src='$fileImg' alt='Profile Picture!'>";
+                        //echo "<img src='$fileImg' alt='Profile Picture!'>";
                     }
                 } else {
-                    echo "<img src ='./images/profiledefault.jpg'>";
+                    //echo "<img src ='./images/profiledefault.jpg'>";
                 }
-                echo "<br>" . $userName;
-                echo "<br><br>";
+                //echo "<br>" . $userName;
+                echo "<br>";
 
                 $student = new Student();
                 $studentDetails = $student->getUserDetails();
                 ?>
 
 <!--                Upload Profile Picture-->
-                <form action='<?php echo ROOTURL . "/upload/picture/" ?>' method='POST' enctype='multipart/form-data'>
-                    <p><input type='file' name='file'></p>
-                    <p>
-                        <button type="submit" name="submit">Upload</button>
-                    </p>
-                </form>
+<!--                <form action='--><?php //echo ROOTURL . "/upload/picture/" ?><!--' method='POST' enctype='multipart/form-data'>-->
+<!--                    <p><input type='file' name='file'></p>-->
+<!--                    <p>-->
+<!--                        <button type="submit" name="submit">Upload</button>-->
+<!--                    </p>-->
+<!--                </form>-->
 
 
                 <form name="f" action="<?php echo ROOTURL."/student/update/"?>" method="POST">

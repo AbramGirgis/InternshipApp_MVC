@@ -105,13 +105,13 @@ class ProfileStudent
                     $fileImg = $fileImg . "." . $profilePic[0]->extension;
                     //echo $fileImg;
                     if ($profilePic[0]->status == 1) {
-                        echo "<img src='$fileImg' alt='Profile Picture!'>";
+                        //echo "<img src='$fileImg' alt='Profile Picture!'>";
                     }
                 } else {
-                    echo "<img src ='./images/profiledefault.jpg'>";
+                    //echo "<img src ='./images/profiledefault.jpg'>";
                 }
-                echo "<br>" . $userName;
-                echo "<br><br>";
+                //echo "<br>" . $userName;
+                echo "<br>";
                 ?>
                 </td>
                 <td></td>
@@ -200,7 +200,7 @@ class ProfileStudent
                 <td></td>
             </tr>
             <tr>
-                <td></td>
+                <td><br></td>
                 <td></td>
                 <td></td>
             </tr>

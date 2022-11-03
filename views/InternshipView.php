@@ -109,7 +109,7 @@ class InternshipView
             ?>
             <b><?php echo $result[0]->name; ?> Department</b>
             <br>
-            Here is a list of the availbale internship offers added to the department
+            Here is a list of the available internship offers added to the department
         </p>
         <?php
         $recentInternships = new Internship();
