@@ -41,7 +41,7 @@ if(isset($URLParametersString))
 //-LogoutController.php
 //-StudentController.php
 //-UpdateController.php
-//-DeleteController.php
+//-InternshipController.php
 
 $controllername = ucfirst(htmlentities($paramsArray[0]))."Controller";
 
